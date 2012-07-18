@@ -1,0 +1,10 @@
+id  : SearchCSV
+key : searchcsv
+name: SearchCSV
+version: 0.1
+author_name: Alfasado Inc.
+author_link: http://alfasado.net/
+description: 'Search data from CSV.'
+tags:
+    block:
+        SearchCSV: sub{}
