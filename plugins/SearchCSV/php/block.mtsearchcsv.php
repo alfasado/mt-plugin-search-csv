@@ -51,31 +51,30 @@ function smarty_block_mtsearchcsv ( $args, $content, &$ctx, &$repeat ) {
         $ctx->stash( '__mtsearchcsv_contents', $res );
         $ctx->stash( '__mtsearchcsv_match_count', count( $res ) );
         //var_dump( $res );
-    } else {
-        $counter = $ctx->stash( '__mtsearchcsv_counter' );
-        $contents = $ctx->stash( '__mtsearchcsv_contents' );
-        $max = $ctx->stash( '__mtsearchcsv_match_count' );
-        $count = $counter + 1;
-        if ( $counter < $max ) {
-            $csv = $contents[ $counter ];
-            $counter++;
-            $ctx->stash( '__mtsearchcsv_counter', $counter );
-            $ctx->__stash[ 'vars' ][ '__counter__' ] = $count;
-            $ctx->__stash[ 'vars' ][ '__odd__' ]  = ( $count % 2 ) == 1;
-            $ctx->__stash[ 'vars' ][ '__even__' ] = ( $count % 2 ) == 0;
-            $ctx->__stash[ 'vars' ][ '__first__' ] = $count == 1;
-            $ctx->__stash[ 'vars' ][ '__last__' ] = ( $count == $max );
-            $i = 0;
-            foreach ( $csv as $item ) {
-                $ctx->__stash[ 'vars' ][ '__item_' . $i ] = $item;
-                $i++;
-            }
-            // var_dump( $csv );
-            $repeat = TRUE;
-        } else {
-            $ctx->restore( $localvars );
-            $repeat = FALSE;
+    }
+    $counter = $ctx->stash( '__mtsearchcsv_counter' );
+    $contents = $ctx->stash( '__mtsearchcsv_contents' );
+    $max = $ctx->stash( '__mtsearchcsv_match_count' );
+    $count = $counter + 1;
+    if ( $counter < $max ) {
+        $csv = $contents[ $counter ];
+        $counter++;
+        $ctx->stash( '__mtsearchcsv_counter', $counter );
+        $ctx->__stash[ 'vars' ][ '__counter__' ] = $count;
+        $ctx->__stash[ 'vars' ][ '__odd__' ]  = ( $count % 2 ) == 1;
+        $ctx->__stash[ 'vars' ][ '__even__' ] = ( $count % 2 ) == 0;
+        $ctx->__stash[ 'vars' ][ '__first__' ] = $count == 1;
+        $ctx->__stash[ 'vars' ][ '__last__' ] = ( $count == $max );
+        $i = 0;
+        foreach ( $csv as $item ) {
+            $ctx->__stash[ 'vars' ][ '__item_' . $i ] = $item;
+            $i++;
         }
+        // var_dump( $csv );
+        $repeat = TRUE;
+    } else {
+        $ctx->restore( $localvars );
+        $repeat = FALSE;
     }
     return $content;
 }
