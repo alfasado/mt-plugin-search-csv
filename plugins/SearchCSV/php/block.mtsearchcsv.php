@@ -13,10 +13,10 @@ function smarty_block_mtsearchcsv ( $args, $content, &$ctx, &$repeat ) {
         } else {
             $and_or = strtoupper( $and_or );
         }
-        if ( $cell ) {
+        if (! is_array( $cell ) ) {
             $cell = str_getcsv( $cell, ':' );
         }
-        if ( $regex ) {
+        if (! is_array( $regex ) ) {
             $regex = str_getcsv( $regex, ':' );
         }
         $fp = fopen( $file, 'r' );
